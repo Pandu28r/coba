@@ -1,0 +1,187 @@
+/* Gambar dalam carousel */
+.carousel-inner img {
+    width: 100%;        /* Gambar akan menyesuaikan dengan lebar container */
+    height: 200px;      /* Menentukan tinggi gambar */
+    object-fit: cover;  /* Agar gambar terpotong dengan baik */
+}
+
+/* Layout untuk card carousel */
+.card-carousel {
+    display: flex;
+    position: relative;
+    height: 500px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+/* Card styling */
+.card {
+    position: absolute;
+    width: 30rem;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+/* Styling untuk card aktif (tengah) */
+.active-card {
+    z-index: 10;
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+/* Styling untuk card sebelum aktif */
+.prev-card {
+    transform: translateX(-70%) scale(0.8);
+    opacity: 0.8;
+    z-index: 5;
+}
+
+/* Styling untuk card setelah aktif */
+.next-card {
+    transform: translateX(70%) scale(0.8);
+    opacity: 0.8;
+    z-index: 5;
+}
+
+/* Menyembunyikan card yang tidak ditampilkan */
+.hidden-card {
+    transform: translateX(-200%) scale(0.7);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Navigation buttons untuk card carousel */
+.carousel-navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+}
+
+.nav-button {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.prev-button {
+    margin-right: auto;
+}
+
+.next-button {
+    margin-left: auto;
+}
+
+/* Styling khusus untuk tombol carousel gambar di dalam card */
+.inner-control {
+    width: 10%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel:hover .inner-control {
+    opacity: 1;
+}
+
+.inner-control:hover {
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Carousel image container */
+.carousel {
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    overflow: hidden;
+}
+
+/* Auto slide controls */
+.auto-slide-controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px auto;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+    .card {
+        width: 25rem;
+    }
+    
+    .prev-card {
+        transform: translateX(-60%) scale(0.8);
+    }
+    
+    .next-card {
+        transform: translateX(60%) scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-carousel {
+        height: 600px;
+    }
+    
+    .card {
+        width: 90%;
+        max-width: 20rem;
+    }
+    
+    .prev-card {
+        transform: translateX(-40%) scale(0.7);
+    }
+    
+    .next-card {
+        transform: translateX(40%) scale(0.7);
+    }
+    
+    .inner-control {
+        opacity: 1;
+        background-color: rgba(0,0,0,0.3);
+    }
+}
+
+@media (max-width: 576px) {
+    .card-carousel {
+        height: 520px;
+    }
+    
+    .card {
+        width: 90%;
+        max-width: 18rem;
+    }
+    
+    .prev-card, .next-card {
+        opacity: 0.6;
+    }
+    
+    .prev-card {
+        transform: translateX(-30%) scale(0.6);
+    }
+    
+    .next-card {
+        transform: translateX(30%) scale(0.6);
+    }
+}

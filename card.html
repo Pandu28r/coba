@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Card Carousel</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card-carousel">
+            <!-- Card 1 -->
+            <div class="card shadow bg-body rounded" id="card1">
+                <div class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="assets/pexels-pixabay-258154.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card 1</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card shadow bg-body rounded" id="card2">
+                <div class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="assets/pexels-pixabay-262047.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card 2</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card shadow bg-body rounded" id="card3">
+                <div class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="assets/pexels-pixabay-164595.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card 3</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation buttons -->
+        <div class="carousel-navigation">
+            <button class="nav-button prev-button" id="prevBtn">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="nav-button next-button" id="nextBtn">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-carousel .card');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentIndex = 0;
+            
+            // Function to update card positions
+            function updateCardPositions() {
+                cards.forEach((card, index) => {
+                    card.className = 'card shadow bg-body rounded';
+                    
+                    // Calculate the position relative to the current index
+                    let position = (index - currentIndex) % cards.length;
+                    if (position < 0) position += cards.length;
+                    
+                    if (position === 0) {
+                        card.classList.add('active-card');
+                    } else if (position === 1 || position === cards.length - 1) {
+                        card.classList.add(position === 1 ? 'next-card' : 'prev-card');
+                    } else {
+                        card.classList.add('hidden-card');
+                    }
+                });
+            }
+            
+            // Initialize card positions
+            updateCardPositions();
+            
+            // Event listeners for buttons
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                updateCardPositions();
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % cards.length;
+                updateCardPositions();
+            });
+            
+            // Enable clicking on cards
+            cards.forEach((card, index) => {
+                card.addEventListener('click', function() {
+                    if (index !== currentIndex) {
+                        // If it's the next card in order
+                        if ((index === currentIndex + 1) || (currentIndex === cards.length - 1 && index === 0)) {
+                            currentIndex = (currentIndex + 1) % cards.length;
+                        } 
+                        // If it's the previous card in order
+                        else if ((index === currentIndex - 1) || (currentIndex === 0 && index === cards.length - 1)) {
+                            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                        }
+                        updateCardPositions();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
