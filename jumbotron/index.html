@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Jumbotron example · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      .bg-image-main {
+        color: white;
+        background-image: url('../img/bromo.jpg'), linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-image-1 {
+        color: white;
+        background-image: url('../img/tumpak-sewu.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-image-2 {
+        color: white;
+        background-image: url('../img/ijen.jpg'), linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+        background-size: cover;
+        background-position: center;
+      }
+
+      .segoe {
+        font-family: Segoe Print;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+      /* Spacer untuk membuat halaman lebih panjang */
+      .spacer {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        text-align: center;
+        padding: 20px;
+      }
+
+      /* Kelas untuk animasi */
+      .animate-fade-in {
+        opacity: 0;
+        transition: opacity 1.5s ease;
+      }
+      
+      .animate-slide-left {
+        opacity: 0;
+        transform: translateX(100px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      
+      .animate-slide-right {
+        opacity: 0;
+        transform: translateX(-100px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      
+      /* Kelas yang ditambahkan saat elemen terlihat */
+      .fade-in-visible {
+        opacity: 1;
+      }
+      
+      .slide-left-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      
+      .slide-right-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Spacer atas -->
+    <div class="spacer">
+      <div class="container">
+        <h1>Scroll ke bawah untuk melihat animasi</h1>
+        <p>↓ ↓ ↓</p>
+      </div>
+    </div>
+    
+    <main>
+      <div class="container py-4">
+        <!-- Jumbotron utama dengan animasi fade-in -->
+        <div class="p-5 mb-4 bg-light rounded-3 bg-image-main animate-fade-in" id="jumbotron">
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold segoe">Wonderful</h1>
+            <h1 class="display-5 fw-bold segoe">BROMO</h1>
+            <h1 class="display-5 fw-bold">HELIOS HOTEL</h1>
+            <p class="col-md-8 fs-4">"Rasakan Keajaiban Bromo, Dapatkan Pengalaman Tak Terlupakan!" <br>Ingin merasakan sensasi matahari terbit di Bromo? Bergabunglah dalam perjalanan penuh petualangan dan nikmati keindahan alam yang memukau. Jangan lewatkan kesempatan untuk menjelajahi keajaiban Indonesia!</p>
+            <button class="btn btn-primary btn-lg" type="button">Lihat Selengkapnya</button>
+          </div>
+        </div>
+
+        <div class="row align-items-md-stretch">
+          <!-- Card kiri dengan animasi slide dari kanan -->
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3 bg-image-1 animate-slide-right" id="card-left">
+              <h2 class="segoe">Explore Tumpak Sewu</h2>
+              <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
+              <button class="btn btn-primary btn-sml" type="button">Lihat Selengkapnya</button>
+            </div>
+          </div>
+          <!-- Card kanan dengan animasi slide dari kiri -->
+          <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3 bg-image-2 animate-slide-left" id="card-right">
+              <h2 class="segoe">Explore Ijen Blue Fire</h2>
+              <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
+              <button class="btn btn-primary btn-sml" type="button">Lihat Selengkapnya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Spacer bawah -->
+    <div class="spacer bg-light">
+      <div class="container">
+        <h2>Animasi telah ditampilkan</h2>
+        <p>Refresh halaman untuk melihat lagi</p>
+      </div>
+    </div>
+
+    <!-- JavaScript untuk Intersection Observer -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Fungsi callback untuk observer
+        function handleIntersect(entries, observer) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Elemen saat ini terlihat di viewport
+              if (entry.target.id === 'jumbotron') {
+                entry.target.classList.add('fade-in-visible');
+              } else if (entry.target.id === 'card-left') {
+                entry.target.classList.add('slide-right-visible');
+              } else if (entry.target.id === 'card-right') {
+                entry.target.classList.add('slide-left-visible');
+              }
+              
+              // Hentikan observasi setelah animasi berjalan satu kali
+              observer.unobserve(entry.target);
+            }
+          });
+        }
+
+        // Konfigurasi observer
+        const options = {
+          root: null, // menggunakan viewport sebagai root
+          rootMargin: '0px', // margin tambahan pada root
+          threshold: 0.2 // trigger ketika minimal 20% elemen terlihat
+        };
+
+        // Buat instance observer
+        const observer = new IntersectionObserver(handleIntersect, options);
+
+        // Elemen yang akan diobservasi
+        const jumbotron = document.getElementById('jumbotron');
+        const cardLeft = document.getElementById('card-left');
+        const cardRight = document.getElementById('card-right');
+
+        // Mulai observasi
+        observer.observe(jumbotron);
+        observer.observe(cardLeft);
+        observer.observe(cardRight);
+      });
+    </script>
+  </body>
+</html>
